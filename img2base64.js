@@ -1,5 +1,6 @@
 var fs = require( 'fs' ),
     path = require( 'path' ),
+    mime = require( 'mime' ),
     dir = process.argv[2],
     jsonName = process.argv[3] || false,
     files = [],
@@ -71,11 +72,11 @@ var createJson = function( arr, callback ){
             var ext = path.extname( value );
 
             if( ext ){
-                
+
                 toBase64( p, function( result ){
 
                     j = j || {};
-                    j[ value ] = result;
+                    j[ value ] = 'result';
 
                     next();
 
@@ -94,8 +95,10 @@ var createJson = function( arr, callback ){
 
 }
 
-// RECEBE ARRAY E GRAVA ARQUIVO POR ARQUIVO
-var createFiles = function( arr, callback ){
+/*  RECEBE ARRAY E GRAVA ARQUIVO POR ARQUIVO
+*   !! Não usado !!
+*/
+/*var createFiles = function( arr, callback ){
 
     var i = 0, obj;
     (function next() {
@@ -109,7 +112,7 @@ var createFiles = function( arr, callback ){
 
             obj = { 'data': result };
 
-            writeFile( fileName + '.js' , JSON.stringify( obj ), function(){
+            writeFile( fileName + '.js' , 'jsonData(' + JSON.stringify( obj ) + ')' , function(){
 
                 next();
 
@@ -119,7 +122,7 @@ var createFiles = function( arr, callback ){
 
     })();
 
-}
+}*/
 
 // GRAVA ARQUIVO
 var writeFile = function( fileName, content, callback ){
@@ -149,8 +152,10 @@ var toBase64 = function( file, callback ){
 
     fs.readFile( file, function(err, data){
 
-        var base64 = new Buffer(data, 'binary').toString('base64');
-        callback( base64 );
+        var base64 = new Buffer(data, 'binary').toString('base64'),
+        mimetype = mime.lookup( file );
+
+        callback( "data:" + mimetype + ";base64," + base64 );
 
     });
 
@@ -158,20 +163,19 @@ var toBase64 = function( file, callback ){
 
 readDir( dir, function(err, res){
 
-    if ( jsonName ) {
+    /*if ( jsonName ) {
 
         createJson( res, function(){
 
             jsonName = jsonName || 'json.js';
 
-            json = json[ dir ]; // <--- RETIRA PASTA INICIAL DO OBJETO
             jsonStr = 'jsonData(' + JSON.stringify( json, null, 4 ) + ')';
 
             writeFile( jsonName, jsonStr );
 
         });
 
-    } else {
+    } else {*/
 
         createFiles( res , function(){
 
@@ -179,6 +183,6 @@ readDir( dir, function(err, res){
 
         });
 
-    }
+    //}
 
 });
