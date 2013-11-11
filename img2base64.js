@@ -58,7 +58,7 @@ var readDir = function(dir, callback) {
 };
 
 // RECEBE ARRAY E MONTA JSON, CONVERTENDO TODOS OS ARQUIVOS EM BASE64
-var createJson = function( arr, callback ){
+/*var createJson = function( arr, callback ){
 
     var i = 0;
     (function next() {
@@ -93,12 +93,12 @@ var createJson = function( arr, callback ){
 
     })();
 
-}
+}*/
 
 /*  RECEBE ARRAY E GRAVA ARQUIVO POR ARQUIVO
 *   !! Não usado !!
 */
-/*var createFiles = function( arr, callback ){
+var createFiles = function( arr, callback ){
 
     var i = 0, obj;
     (function next() {
@@ -122,7 +122,7 @@ var createJson = function( arr, callback ){
 
     })();
 
-}*/
+}
 
 // GRAVA ARQUIVO
 var writeFile = function( fileName, content, callback ){
