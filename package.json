@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "Rodrigo França",
+    "url": "http://github.com/rodrigofranca"
+  },
+  "dependencies": {},
+  "description": "A comprehensive library for mime-type mapping",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/broofa/node-mime/master/LICENSE"
+    }
+  ],
+  "devDependencies": {
+    "mime": "~1.2.11"
+  },
+  "main": "img2base64.js",
+  "name": "img2base64",
+  "repository": {
+    "url": "https://github.com/rodrigofranca/img2base64",
+    "type": "git"
+  },
+  "version": "1.2.11"
+}
